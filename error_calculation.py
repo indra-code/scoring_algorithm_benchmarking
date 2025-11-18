@@ -12,7 +12,7 @@ def score_to_stars(score):
     return int(idx + 1)
 
 model_scores = load_json("model_outputs.json")
-human_stars = load_json("human_ratings.json")
+human_stars = load_json("human_outputs.json")
 
 common = sorted(set(model_scores.keys()) & set(human_stars.keys()))
 
