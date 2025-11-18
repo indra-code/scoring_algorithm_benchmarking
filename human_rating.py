@@ -38,14 +38,7 @@ def go_next():
     if st.session_state.index < len(image_files) - 1:
         st.session_state.index += 1
 
-def go_prev():
-    # Save current rating before moving
-    current_file = image_files[st.session_state.index]
-    if "rating" in st.session_state:
-        labels[current_file] = st.session_state.rating
-        save_labels()
-    if st.session_state.index > 0:
-        st.session_state.index -= 1
+
 
 # UI
 st.title("⭐ Human Footpath Rating Tool — Star Edition ⭐")
@@ -63,22 +56,16 @@ st.text(f"Filename: {current_file}")
 img = Image.open(os.path.join(IMAGE_DIR, current_file))
 st.image(img, use_container_width=True)
 
-# Get current rating (fallback = 3 stars)
-current_stars = labels.get(current_file, 3)
+# Check if already rated
+if current_file in labels:
+    st.success(f"✅ Already rated: {labels[current_file]} stars")
+    st.write("### This image has been rated. Click Next to continue.")
+else:
+    # ⭐ Animated Star Rating Input
+    st.write("### Rate the Footpath (1-5 stars) ⭐")
+    stars = st_star_rating(maxValue = 5, defaultValue = 3, key = "rating", dark_theme = True )
 
-# ⭐ Animated Star Rating Input
-st.write("### Rate the Footpath (1-5 stars) ⭐")
-stars = st_star_rating(label = "Please rate the footpath", maxValue = 5, defaultValue = current_stars, key = "rating", dark_theme = True )
-
-# Navigation Buttons
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("⬅ Previous"):
-        go_prev()
-        st.rerun()
-with col2:
-    if st.button("Next ➡"):
-        go_next()
-        st.rerun()
-
-st.write("Saved Rating:", labels.get(current_file, "Not rated"))
+# Navigation Button
+if st.button("Next ➡", use_container_width=True):
+    go_next()
+    st.rerun()
