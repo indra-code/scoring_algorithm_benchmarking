@@ -63,7 +63,7 @@ if current_file in labels:
 else:
     # ⭐ Animated Star Rating Input
     st.write("### Rate the Footpath (1-5 stars) ⭐")
-    stars = st_star_rating(maxValue = 5, defaultValue = 3, key = "rating", dark_theme = True )
+    stars = st_star_rating(label="Rate the footpath",maxValue = 5, defaultValue = 3, key = "rating", dark_theme = True )
 
 # Navigation Button
 if st.button("Next ➡", use_container_width=True):
