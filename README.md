@@ -14,7 +14,7 @@
 Run the Streamlit app to manually rate footpath images:
 
 ```powershell
-streamlit run human_rating.py
+python -m streamlit run human_rating.py
 ```
 
 - Navigate through images using the Next/Previous buttons
