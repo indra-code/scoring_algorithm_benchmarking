@@ -1,0 +1,4 @@
+.env
+venv
+human_outputs.json
+__pycache__/
