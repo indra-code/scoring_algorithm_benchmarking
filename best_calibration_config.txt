@@ -1,0 +1,13 @@
+Best Calibration: Power 1.2 + shift -14
+============================================================
+
+MAE: 0.440 stars
+Exact Match: 38.7%
+Within ±0.5 stars: 81.3%
+Within ±1.0 stars: 93.3%
+Spearman Correlation: 0.359
+Unique Predictions: 5/10 star levels
+
+Implementation:
+calibrated = (raw_score / 100) ** 1.2 * 100 + -14
+calibrated = np.clip(calibrated, 0, 100)
